@@ -1,0 +1,114 @@
+<html>
+<head>
+<title>
+QuotyQuote
+</title>
+
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<style type="text/css">
+<!--
+
+p   {
+        margin-top: 1%;
+        margin-bottom: 1%;
+        margin-right: 1%;
+        margin-left: 1%;
+        font-family:   arial, century gothic, MS sans,  new york, courier;
+        font-size: 12pt;
+        color: #000000;	
+}
+
+body  {
+        background-color:  #ffffff;
+        /*background-image: url('images/wreckdude3.jpg');*/
+        /*background-image: url('images/wreckdude3-nosmke.jpg'); */
+        background-image: url('images/quoteyquote.jpg');
+        background-image: url('quotyquote.jpg');
+        background-repeat: no-repeat;  
+        background-attachment:  fixed; 
+        background-position:  left;     
+        color:		     #000000;
+        scrollbar-face-color: #ffffff;
+        scrollbar-shadow-color: #000000;
+        scrollbar-highlight-color: #000000;
+        scrollbar-3dlight-color: #ffffff;
+        scrollbar-darkshadow-color: #000000;
+        scrollbar-track-color: #000000;
+        scrollbar-arrow-color: #ffffff; 
+   }
+
+.page_cnt_right {
+    margin-left:385;
+    margin-top:65;
+    margin-right:25;
+    margin-bottom:20;
+}
+
+//-->
+</style>
+</head>
+<body>
+
+    <!-- this puts all the text to the far right of the screen, 
+    so that picture looks cool //-->
+<div class="page_cnt_right">
+        <br />
+         <p>QuotyQuote</p>
+        <br />
+        <hr />
+        <p> 
+         <form name="add_quote" action="add_quote.cgi" method="get">
+             Username:
+             <input type="textarea" rows="10" cols="30" name="quote"
+                    wrap="physical" name="comments" /></textarea>
+<!-- have thiese all be pre-populated with current db values -->
+             <input type="text" name="attr_name" size="20" value="attr" />
+             <input type="text" name="source"  maxlength="40" />
+             <input type="text" name="rating" />
+             <input type="text" name="category" />
+                <select name="cars" multiple name="music" size="4">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="fiat">Fiat</option>
+                <option value="audi">Audi</option>
+                </select>
+             <input type="submit" value="Submit" />
+             <input type="button" value="Get Quote" />
+             <input type="checkbox" name="vehicle" value="Bike" />
+                Male: 
+                <input type="radio" checked="checked"
+                name="Sex" value="male">
+                <br>
+                Female: 
+                <input type="radio"
+                name="Sex" value="female">
+                <fieldset>
+                <legend>
+                Health information:
+                </legend>
+                <form action="">
+                Height <input type="text" size="3">
+                Weight <input type="text" size="3">
+                </form>
+                </fieldset>
+<input type="hidden" name="MAX_FILE_SIZE" value="100" />
+<input name="file" type="file" />
+         </form>
+        </p>
+            <a href="http://mus335.freeshell.org/lucy.html">void lucy</a>
+
+        <br />
+        <br />
+        e-mail: mus335 [at] sdf [dot] lonestar [dot] org
+        <br />
+
+<!--
+        <br />
+                <a href="http://mus335.freeshell.org">mus335.freeshell.org</a>
+        <br />
+//-->
+</div>
+
+</body>
+</html>

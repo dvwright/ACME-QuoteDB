@@ -1,0 +1,145 @@
+Bugs to fix in Acme quotedb
+-------------------------------
+1. the debian package i created, not installing db as rw.
+
+[dwright@debian perl]$ perl load_quotes_tut.pl
+DBD::SQLite::db do failed: attempt to write a readonly database at /usr/share/perl5/ACME/QuoteDB/LoadDB.pm line 552.
+Unsuccessful stat on filename containing newline at /usr/share/perl5/ACME/QuoteDB/LoadDB.pm line 158.
+file not found: <HTML>
+
+
+2. these are not getting set on the object as they should:
+Category: 
+Source: 
+Rating:
+
+Rating: 
+$VAR1 = {
+          'quote' => 'Programming is an unnatural act.'
+        };
+Quote: Programming is an unnatural act.
+Use of uninitialized value in print at /usr/share/perl5/ACME/QuoteDB/LoadDB.pm line 409.
+Source: 
+Use of uninitialized value in print at /usr/share/perl5/ACME/QuoteDB/LoadDB.pm line 410.
+Category: 
+Use of uninitialized value in print at /usr/share/perl5/ACME/QuoteDB/LoadDB.pm line 411.
+
+
+3. should be able to pass a data stream to loader (as well as a file and dir, etc)
+
+ 83 my $load_db = LoadQuoteDBFromHTML->new({
+ 84                             file => $file,
+
+
+       PERM_RW
+         Desired permission for read/writable files. Defaults to 644.  See also "perm_rw" in
+         MM_Unix.
+
+       ·   rules.Module-Build.noxs
+
+           A debian/rules makefile for modules that use Module::Build, but don't have C/XS
+           code.
+
+
+3. fix 'untaint' file dir path for failing tests (i.e add '.' and for win32 add ':')
+DBI connect('dbname=/home/ct/test/perl-5/quotes.db','',...) failed: unable to open database file at /home/ct/test/perl-5.10.0-thread/.cpan/build/ACME-QuoteDB-P_7VgA/blib/lib/ACME/QuoteDB/LoadDB.pm line 546
+/home/ct/test/perl-5/quotes.db cannot be accessed  unable to open database file at t/01-load_quotes.t line 29
+
+
+
+
+
+
+Needs the following debian packages: perl-modules, libdbd-sqlite-perl (>= 1.14), libtext-csv-perl (>= 1.06), libaliased-perl (>= 0.22), libclass-dbi-perl (>= 3.0.17), libreadonly-perl (>= 1.03), libhtml-parser-perl (>= 2.37)
+The following Perl modules are required and not installed in your system:
+ - DBD::SQLite
+ - Text::CSV
+ - aliased
+ - Class::DBI
+ - Readonly
+ - HTML::TokeParser
+You do not have 'apt-file' currently installed, or have not ran
+'apt-file update' - If you install it and run 'apt-file update' as
+root, I will be able to tell you which Debian packages are those
+modules in (if they are packaged).Using maintainer: david wright <dwright@debian.piggydev>
+Found changelog: Changes
+Found docs: README
+Using rules: /usr/share/dh-make-perl/rules.dh7.tiny
+--- Done
+**********
+
+ran those commandds:
+
+
+[dwright@debian libacme-quotedb-perl-0.1.0]$ dh-make-perl     
+Found: ACME-QuoteDB 0.1.0 (libacme-quotedb-perl arch=all)
+Parsing /var/cache/apt/apt-file/download.virtualbox.org_virtualbox_debian_dists_intrepid_Contents-i386.gz ...
+Parsing /var/cache/apt/apt-file/ftp.debian.org_debian_dists_squeeze_Contents-i386.gz ...
+Parsing /var/cache/apt/apt-file/http.us.debian.org_debian_dists_stable_Contents-i386.gz ...
+ 
+
+
+= version is a core module
+= File::Spec is a core module
+= Data::Dumper is a core module
+= Carp is a core module
+= Test::More is a core module
+= File::Basename is a core module
+= Cwd is a core module
++ DBD::SQLite found in libdbd-sqlite3-perl
++ Text::CSV found in libtext-csv-perl
++ aliased found in libaliased-perl
++ Class::DBI found in libclass-dbi-perl
++ Readonly found in libreadonly-perl
++ HTML::TokeParser found in libhtml-parser-perl
+
+Needs the following debian packages: perl-modules, libdbd-sqlite3-perl (>= 1.14), libtext-csv-perl (>= 1.06), libaliased-perl (>= 0.22), libclass-dbi-perl (>= 3.0.17), libreadonly-perl (>= 1.03), libhtml-parser-perl (>= 2.37)
+Using maintainer: david wright <dwright@debian.piggydev>
+Found changelog: Changes
+Found docs: README
+Using rules: /usr/share/dh-make-perl/rules.dh7.tiny
+--- Done
+**********
+WARNING: a package named
+              'libacme-quotedb-perl'
+         is already available in APT repositories
+Maintainer: david wright <dvwright@cpan.org>
+Description: ACME-QuoteDB - API implements CRUD for a Collection of Quotes
+
+
+
+
+Needs the following debian packages: perl-modules, libdbd-sqlite3-perl (>= 1.14), libtext-csv-perl (>= 1.06), libaliased-perl (>= 0.22), libclass-dbi-perl (>= 3.0.17), libreadonly-perl (>= 1.03), libhtml-parser-perl (>= 2.37)
+Using maintainer: david wright <dvwright@cpan.org>
+Found changelog: Changes
+Found docs: README
+Using rules: /usr/share/dh-make-perl/rules.dh7.tiny
+--- Done
+**********
+WARNING: a package named
+              'libacme-quotedb-perl'
+         is already available in APT repositories
+Maintainer: david wright <dvwright@cpan.org>
+Description: ACME-QuoteDB - API implements CRUD for a Collection of Quotes
+
+
+
+
+ 78     $sane_path =~ m{([a-zA-Z0-9-_\.:\/\\\s]+)}; #add '.', ':' for win32
+
+
+
+[dwright@debian ACME-QuoteDB]$ ./Build dist
+Creating Makefile.PL
+Added to MANIFEST: Makefile.PL
+Creating META.yml
+Added to MANIFEST: META.yml
+Creating ACME-QuoteDB-0.1.1
+Creating ACME-QuoteDB-0.1.1.tar.gz
+tar cf ACME-QuoteDB-0.1.1.tar ACME-QuoteDB-0.1.1
+gzip ACME-QuoteDB-0.1.1.tar
+Deleting ACME-QuoteDB-0.1.1
+
+
+
+
